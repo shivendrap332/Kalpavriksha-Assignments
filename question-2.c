@@ -18,7 +18,7 @@ void createFile(){
 void addUser()
 {
     User newU, old;
-    printf("Enter ID Name Age: ");
+    printf("\n\tEnter ID Name Age: ");
     scanf("%d %49s %d",&newU.id, newU.name,&newU.age);
 
     FILE *f = fopen("users.txt", "r");
@@ -88,7 +88,7 @@ void updateUser()
     while(fscanf(f,"%d %49s %d",&rec.id,rec.name,&rec.age) == 3){
         if(rec.id == uid){
             flag = 1;
-            printf("Enter new Name Age: ");
+           printf("\n\tEnter new Name Age: ");
             scanf("%49s %d", rec.name, &rec.age);
         }
         fprintf(tf, "%d %s %d\n", rec.id, rec.name, rec.age);
