@@ -1,19 +1,21 @@
 #include <stdio.h>
 
-int main()
+void calculate()
 {
     char expr[1000];
     char lastOp = '+';
     int total = 0;
     int current = 0;
-
+    
     int needNum = 1;
     int seenNum = 0;
+printf("Enter the expression: ");
     fgets(expr, sizeof(expr), stdin);
 
     for (int i = 0; expr[i] != '\0'; i++)
     {
         char ch = expr[i];
+
         if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r')
             continue;
 
@@ -22,15 +24,17 @@ int main()
             if (!needNum)
             {
                 printf("Error: Invalid expression.\n");
-                return 0;
+                return;
             }
+
             int value = 0;
 
             while (expr[i] >= '0' && expr[i] <= '9')
             {
-                value = value*10 + (expr[i] - '0');
+                value = value * 10 + (expr[i] - '0');
                 i++;
             }
+
             i--;
 
             if (lastOp == '+')
@@ -50,10 +54,12 @@ int main()
                 if (value == 0)
                 {
                     printf("Error: Division by zero.\n");
-                    return 0;
+                    return;
                 }
+
                 current /= value;
             }
+
             needNum = 0;
             seenNum = 1;
         }
@@ -62,25 +68,31 @@ int main()
             if (needNum)
             {
                 printf("Error: Invalid expression.\n");
-                return 0;
+                return;
             }
+
             lastOp = ch;
             needNum = 1;
         }
         else
         {
             printf("Error: Invalid expression.\n");
-            return 0;
+            return;
         }
     }
 
     if (!seenNum || needNum)
     {
         printf("Error: Invalid expression.\n");
-        return 0;
+        return;
     }
+
     total += current;
     printf("%d\n", total);
+}
 
+int main()
+{
+    calculate();
     return 0;
 }
